@@ -1,0 +1,66 @@
+:root {
+    --header-main-bg: #036C46;
+    --navbar-main-bg: #024B31;
+    --p-font-en: 'Montserrat';
+    --p-font-ar: 'Montserrat-Arabic';
+    --p-weight-en: 800;
+    --p-sz: 30px;
+}
+
+header {
+    background-color: var(--header-main-bg);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 132px;
+    gap: 39px;
+}
+
+.left-pane, .mid-pane, .right-pane {
+    display: flex;
+    align-items: center;
+    color: white;
+    height: 37px;
+    gap: 39px;
+}
+
+.mid-pane {
+    gap: 0;
+    width: 400px;
+}
+
+p {
+    font-family: var(--p-font-en);
+    font-weight: var(--p-weight-en);
+    font-size: var(--p-sz);
+    margin: 0;
+}
+
+p.ar {
+    font-family: var(--p-font-ar);
+}
+
+nav {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 25px;
+    height: 57px;
+    padding: 27px 134px;
+    background-color: var(--navbar-main-bg);
+}
+
+ul {
+    display: flex;
+
+    gap: 39px;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font: var(--p-font-ar);
+    color: white;
+}
