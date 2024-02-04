@@ -11,6 +11,7 @@ const Product = defineAsyncComponent(() =>
 </script>
 
 <template>
-    <Header />
-    <Product />
+    <LazyHeader />
+    <LazyProduct />
+    <LazyFooter />
 </template>
