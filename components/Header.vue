@@ -48,7 +48,7 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
       <img src="assets/icons/logo.png" alt="" srcset="">
     </div>
   </header>
-  <nav>
+  <nav class="nav">
     <ul>
       <!-- placeholders -->
       <li>تواصل معنا</li>
