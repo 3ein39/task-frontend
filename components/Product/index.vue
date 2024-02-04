@@ -6,6 +6,7 @@ import {ref} from "vue";
 const endpoint = 'http://localhost:4000/graphql'
 let productDetails = ref(null);
 let productImages = ref(null);
+let productRatings = ref(null);
 
 const loadProductDetails = async () => {
   const productByIDQuery = gql`
@@ -29,11 +30,21 @@ const loadProductDetails = async () => {
         image_id
         url
         is_main
+    },
+      productGetRatingsByID(product_id: 1) {
+        user_id
+        rating
+        comment
+        timestamp
+        user {
+          username
+        }
     }
   }
   `
   productDetails.value = await request(endpoint, productByIDQuery)
   productImages.value = productDetails.value.productGetImagesByID
+  productRatings.value = productDetails.value.productGetRatingsByID
 }
 loadProductDetails()
 
@@ -61,6 +72,12 @@ const routes = [
     <div v-for="image in productImages" :key="image.image_id">
       <img :src="image.url" alt="product image" />
     </div>
+
+    <div v-for="rating in productRatings" :key="rating.user_id">
+      <p>{{ rating.user.username }}: {{ rating.rating }}</p>
+      <p>{{ rating.comment }}</p>
+    </div>
+
   </div>
 
 </template>
