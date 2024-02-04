@@ -78,6 +78,10 @@ const routes = [
       <p>{{ rating.comment }}</p>
     </div>
 
+    <button>Add to cart</button>
+
+    <LazyProductInfo :product-details="productDetails" :product-ratings="productRatings" />
+    <LazyProductSliders />
   </div>
 
 </template>
