@@ -2,6 +2,7 @@
 import '@/assets/css/header.css';
 import { Space, Input, Dropdown, Typography, Menu } from 'ant-design-vue';
 const { Search } = Input;
+import { ref } from 'vue'
 
 const countries = [
   {
@@ -22,12 +23,20 @@ const countries = [
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
+let isLTR = ref(false);
+const toggleDirection = () => {
+  isLTR.value = !isLTR.value;
+  document.dir = isLTR.value ? 'ltr' : 'rtl';
+  document.querySelector('html').setAttribute('lang', isLTR.value ? 'en' : 'ar');
+  console.log('isLTR', isLTR.value);
+}
+
 </script>
 
 <template>
   <header>
     <div class="left-pane">
-      <p>EN</p>
+      <p @click="toggleDirection" class="btn">EN</p>
      <img src="assets/icons/cart.png" alt="" srcset="">
      <p class="ar">تسجيل الدخول</p>
     </div>
@@ -128,5 +137,9 @@ ul, li {
   margin: 0;
   font: var(--p-font-ar);
   color: white;
+}
+
+.btn {
+  cursor: pointer;
 }
 </style>
