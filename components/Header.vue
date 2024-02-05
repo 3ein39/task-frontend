@@ -76,13 +76,13 @@ const handleOK = () => {
       <p class="ar btn" @click="fakeLogin" v-if="!isLoggedIn">تسجيل الدخول</p>
       <p class="btn" @click="fakeLogin" v-if="isLoggedIn">تسجيل الخروج</p>
     </div>
-    
+
 
     <div class="mid-pane">
       <div class="flex flex-row-reverse w-full">
         <input class="w-full px-4 py-2 rounded-r-md focus:outline-none focus:ring-0" type="text"
           placeholder="input search text" />
-          <!-- recent searches and overlay to be implemented -->
+        <!-- recent searches and overlay to be implemented -->
         <button @click="isFinished" class="px-4 py-2 text-white rounded-l-md" style="background-color: #FFBD1F;">
           <img src="/assets/icons/search.png" alt="Search" />
         </button>
@@ -90,7 +90,7 @@ const handleOK = () => {
     </div>
 
     <div class="right-pane">
-      <a-dropdown :trigger="['click']">
+      <a-dropdown class="ship-info" :trigger="['click']">
         <div class="dropdown-link-container">
           <a class="ant-dropdown-link" @click.prevent>
             <DownOutlined />
@@ -132,6 +132,12 @@ const handleOK = () => {
   --p-font-en: 'Montserrat';
   --p-font-ar: 'Montserrat-Arabic';
   --p-sz: 30px;
+}
+
+@media (max-width: 1194px) {
+  .ship-info {
+    display: none !important;
+  }
 }
 
 

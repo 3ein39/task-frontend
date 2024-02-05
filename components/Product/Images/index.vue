@@ -38,7 +38,6 @@ const zoomOut = () => {
   display: flex;
   align-items: flex-start;
 }
-
 .main-image {
   width: 373px;
   height: 520px;
@@ -62,4 +61,18 @@ const zoomOut = () => {
   height: 100%;
   object-fit: cover;
   cursor: pointer;
-}</style>
+}
+
+
+@media (max-width: 1193px) {
+  .image-carousel {
+    flex-direction: column;
+  }
+  .thumbnail-images {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+
+</style>

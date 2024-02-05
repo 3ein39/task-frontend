@@ -106,6 +106,14 @@ const routes = [
   gap: 20px;
   margin: 20px;
 }
+
+@media (max-width: 1194px) {
+  .main-product {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}
 .left-main {
   width: 50%;
   padding: 36px;
