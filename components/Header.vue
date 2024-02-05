@@ -64,11 +64,14 @@ const handleOK = () => {
     </div>
 
     <div class="mid-pane">
-
-      <Space direction="vertical">
-        <Search style="width: 400px" placeholder="input search text" />
-      </Space>
-
+      <div class="flex flex-row-reverse w-full">
+        <input class="w-full px-4 py-2 rounded-r-md focus:outline-none focus:ring-0" type="text"
+          placeholder="input search text" />
+          <!-- recent searches and overlay to be implemented -->
+        <button @click="isFinished" class="px-4 py-2 text-white rounded-l-md" style="background-color: #FFBD1F;">
+          <img src="/assets/icons/search.png" alt="Search" />
+        </button>
+      </div>
     </div>
 
     <div class="right-pane">
@@ -122,8 +125,11 @@ const handleOK = () => {
 }
 
 .dropdown-link-text {
-  margin-right: 10px; /* Adjust as needed */
-}.ant-dropdown-link {
+  margin-right: 10px;
+  /* Adjust as needed */
+}
+
+.ant-dropdown-link {
   display: flex;
   flex-direction: row;
   margin: 8px;
