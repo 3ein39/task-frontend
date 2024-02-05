@@ -1,7 +1,7 @@
 <template>
   <div v-if="productImages" class="image-carousel">
     <div class="main-image">
-      <img :src="productImages[0].url" alt="Main Image" width="373" height="520">
+      <img :src="productImages[0].url" alt="Main Image" width="373" height="520" @mouseover="zoomIn" @mouseout="zoomOut">
     </div>
     <div class="thumbnail-images">
       <div v-for="(image, index) in productImages.slice(1)" :key="index" class="thumbnail-image">
@@ -20,6 +20,17 @@ const props = defineProps({
     required: true,
   },
 });
+
+const zoomIn = () => {
+  const mainImage = document.querySelector('.main-image');
+  mainImage.style.transform = 'scale(1.3)';
+}
+
+const zoomOut = () => {
+  const mainImage = document.querySelector('.main-image');
+  mainImage.style.transform = 'scale(1)';
+}
+
 </script>
 
 <style scoped>
