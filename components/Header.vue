@@ -64,3 +64,69 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
   </nav>
 
 </template>
+<style scoped>
+
+:root {
+  --p-font-en: 'Montserrat';
+  --p-font-ar: 'Montserrat-Arabic';
+  --p-sz: 30px;
+}
+
+header {
+  background-color: #036C46;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 132px;
+  gap: 39px;
+}
+
+.left-pane, .mid-pane, .right-pane {
+  display: flex;
+  align-items: center;
+  color: white;
+  height: 37px;
+  gap: 39px;
+}
+
+.mid-pane {
+  gap: 0;
+  width: 400px;
+}
+
+p {
+  font-family: 'Montserrat';
+  font-weight: 800;
+  font-size: 30px;
+  margin: 0;
+}
+
+p.ar {
+  font-family: 'Montserrat-Arabic';
+}
+
+.nav {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 25px;
+  height: 57px;
+  padding: 27px 134px;
+  background-color: #024B31;
+}
+
+ul {
+  display: flex;
+
+  gap: 39px;
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font: var(--p-font-ar);
+  color: white;
+}
+</style>
