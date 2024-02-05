@@ -23,6 +23,7 @@ const countries = [
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
+let isOpen = ref(false);
 let isLTR = ref(false);
 const toggleDirection = () => {
   isLTR.value = !isLTR.value;
@@ -31,14 +32,24 @@ const toggleDirection = () => {
   console.log('isLTR', isLTR.value);
 }
 
+const isFinished = () => {
+  isOpen.value = true;
+}
+const handleOK = () => {
+  isOpen.value = false;
+}
+
 </script>
 
 <template>
+  <a-modal v-model:open="isOpen" @ok="handleOK">
+    <p>Comming Soon</p>
+  </a-modal>
   <header>
     <div class="left-pane">
       <p @click="toggleDirection" class="btn">EN</p>
      <img src="assets/icons/cart.png" alt="" srcset="">
-     <p class="ar">تسجيل الدخول</p>
+     <p class="ar btn" @click="isFinished">تسجيل الدخول</p>
     </div>
 
     <div class="mid-pane">
@@ -141,5 +152,9 @@ ul, li {
 
 .btn {
   cursor: pointer;
+}
+
+.a-modal-body {
+  color: #038E5C;
 }
 </style>
