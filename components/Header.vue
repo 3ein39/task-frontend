@@ -32,9 +32,12 @@ const changeCountry = (country) => {
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
+let isLoggedIn = ref(false);
 let isOpen = ref(false);
 let isLTR = ref(false);
 let selectedCountry = ref('السعودية');
+let message = ref('');
+
 
 const toggleDirection = () => {
   isLTR.value = !isLTR.value;
@@ -42,6 +45,16 @@ const toggleDirection = () => {
   document.querySelector('html').setAttribute('lang', isLTR.value ? 'en' : 'ar');
   console.log('isLTR', isLTR.value);
 }
+
+const fakeLogin = () => {
+  isLoggedIn.value = !isLoggedIn.value;
+
+  // better to be implemented with something like flash 
+  message.value = isLoggedIn.value ? 'تم تسجيل الدخول بنجاح' : 'تم تسجيل الخروج بنجاح';
+  setTimeout(() => {
+    message.value = '';
+  }, 2000);
+};
 
 const isFinished = () => {
   isOpen.value = true;
@@ -60,8 +73,10 @@ const handleOK = () => {
     <div class="left-pane">
       <p @click="toggleDirection" class="btn">EN</p>
       <img src="assets/icons/cart.png" alt="" srcset="">
-      <p class="ar btn" @click="isFinished">تسجيل الدخول</p>
+      <p class="ar btn" @click="fakeLogin" v-if="!isLoggedIn">تسجيل الدخول</p>
+      <p class="btn" @click="fakeLogin" v-if="isLoggedIn">تسجيل الخروج</p>
     </div>
+    
 
     <div class="mid-pane">
       <div class="flex flex-row-reverse w-full">
@@ -110,6 +125,7 @@ const handleOK = () => {
 
     </ul>
   </nav>
+  <p class="ar">{{ message }}</p>
 </template>
 <style scoped>
 :root {
