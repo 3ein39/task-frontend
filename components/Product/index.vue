@@ -66,19 +66,31 @@ const routes = [
   <Breadcrumb :routes="routes" />
 
   <div v-if="productDetails">
-    <h1>{{productDetails.productGetByID.title}} title</h1>
-    <p>{{productDetails.productGetByID.description}}</p>
 
-    <div v-for="image in productImages" :key="image.image_id">
-      <img :src="image.url" alt="product image" />
+    <div class="main-product">
+      <div class="left-main">
+       <div class="product-details">
+        <h1>{{ productDetails.productGetByID.title }}</h1>
+        <p>{{ productDetails.productGetByID.description }}</p>
+        <p>Brand: {{ productDetails.productGetByID.brand }}</p>
+        <p>Price: {{ productDetails.productGetByID.price }}</p>
+        <p>Discounted Price: {{ productDetails.productGetByID.discounted_price }}</p>
+        <p>VAT: {{ productDetails.productGetByID.vat }}</p>
+        <p>Gained Points: {{ productDetails.productGetByID.gained_points }}</p>
+        <p>Benefits: {{ productDetails.productGetByID.benefits }}</p>
+        <p>Overview: {{ productDetails.productGetByID.overview }}</p>
+        <p>Gender: {{ productDetails.productGetByID.gender }}</p>
+        <p>Capacity: {{ productDetails.productGetByID.capacity }}</p>
+        <p>Model Number: {{ productDetails.productGetByID.model_number }}</p>
+        <button class="btn">Add to cart</button> 
+      </div>
+    </div>
+      <div class="right-main">
+        <LazyProductImages :product-images="productImages" />
+      </div>
     </div>
 
-    <div v-for="rating in productRatings" :key="rating.user_id">
-      <p>{{ rating.user.username }}: {{ rating.rating }}</p>
-      <p>{{ rating.comment }}</p>
-    </div>
 
-    <button>Add to cart</button>
 
     <LazyProductInfo :product-details="productDetails" :product-ratings="productRatings" />
     <LazyProductSliders />
@@ -87,6 +99,24 @@ const routes = [
 </template>
 
 <style scoped>
+
+.main-product {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+}
+.left-main {
+  width: 50%;
+  padding: 36px;
+}
+
+.right-main {
+  width: 50%;
+  padding: 36px;
+}
+
+
   .ant-breadcrumb {
     margin: 16px;
   }
