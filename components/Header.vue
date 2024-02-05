@@ -5,26 +5,37 @@ const { Search } = Input;
 import { ref } from 'vue'
 
 const countries = [
-  {
-    key: '1',
-    value: 'Egypt',
-  },
-  {
-    key: '2',
-    value: 'UAE',
-  },
-  {
-    key: '3',
-    value: 'KSA',
-  }
-]
+  { name: 'مصر', symbol: 'EGP', rate: 15.69 },
+  { name: 'الإمارات', symbol: 'AED', rate: 3.67 },
+  { name: 'السعودية', symbol: 'SAR', rate: 3.75 },
+  { name: 'الأردن', symbol: 'JOD', rate: 0.71 },
+  { name: 'قطر', symbol: 'QAR', rate: 3.64 },
+  { name: 'الكويت', symbol: 'KWD', rate: 0.30 },
+];
 
+const currencySymbol = computed(() => {
+  const country = countries.find(c => c.name === selectedCountry.value);
+  return country ? country.symbol : '';
+});
+
+const convertPrice = (priceInUSD) => {
+  const country = countries.find(c => c.name === selectedCountry.value);
+  return country ? priceInUSD * country.rate : priceInUSD;
+};
+
+const changeCountry = (country) => {
+  selectedCountry.value = country;
+  // logic to change currency
+  // logic to change price
+};
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 let isOpen = ref(false);
 let isLTR = ref(false);
+let selectedCountry = ref('السعودية');
+
 const toggleDirection = () => {
   isLTR.value = !isLTR.value;
   document.dir = isLTR.value ? 'ltr' : 'rtl';
@@ -48,23 +59,37 @@ const handleOK = () => {
   <header>
     <div class="left-pane">
       <p @click="toggleDirection" class="btn">EN</p>
-     <img src="assets/icons/cart.png" alt="" srcset="">
-     <p class="ar btn" @click="isFinished">تسجيل الدخول</p>
+      <img src="assets/icons/cart.png" alt="" srcset="">
+      <p class="ar btn" @click="isFinished">تسجيل الدخول</p>
     </div>
 
     <div class="mid-pane">
-    
-    <Space direction="vertical">
-    <Search
-      style="width: 400px"
-      placeholder="input search text"
-    />
-    </Space>
+
+      <Space direction="vertical">
+        <Search style="width: 400px" placeholder="input search text" />
+      </Space>
 
     </div>
 
     <div class="right-pane">
-      <p>الشحن إلى</p> <!--to be implemented -->
+      <a-dropdown :trigger="['click']">
+        <div class="dropdown-link-container">
+          <a class="ant-dropdown-link" @click.prevent>
+            <DownOutlined />
+          </a>
+          <div class="dropdown-link-text">
+            <p> الشحن إلى</p>
+            <p> {{ selectedCountry }} </p>
+          </div>
+        </div>
+        <template #overlay>
+          <a-menu>
+            <a-menu-item v-for="country in countries" :key="country.name" @click="changeCountry(country.name)">
+              {{ country.name }}
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
       <img src="assets/icons/logo.png" alt="" srcset="">
     </div>
   </header>
@@ -77,19 +102,31 @@ const handleOK = () => {
       <li>المتجر</li>
       <li>الرئيسية</li>
       <li>
-        <MenuOutlined />      
+        <MenuOutlined />
       </li>
 
     </ul>
   </nav>
-
 </template>
 <style scoped>
-
 :root {
   --p-font-en: 'Montserrat';
   --p-font-ar: 'Montserrat-Arabic';
   --p-sz: 30px;
+}
+
+
+.dropdown-link-container {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-link-text {
+  margin-right: 10px; /* Adjust as needed */
+}.ant-dropdown-link {
+  display: flex;
+  flex-direction: row;
+  margin: 8px;
 }
 
 header {
@@ -102,7 +139,9 @@ header {
   gap: 39px;
 }
 
-.left-pane, .mid-pane, .right-pane {
+.left-pane,
+.mid-pane,
+.right-pane {
   display: flex;
   align-items: center;
   color: white;
@@ -142,7 +181,8 @@ ul {
   gap: 39px;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
   padding: 0;
   margin: 0;
