@@ -3,7 +3,10 @@ import '@/assets/css/header.css';
 import { Space, Input, Dropdown, Typography, Menu } from 'ant-design-vue';
 const { Search } = Input;
 import { ref } from 'vue'
+import { gql, request } from 'graphql-request'
 
+
+const endpoint = 'http://localhost:4000/graphql'
 const countries = [
   { name: 'مصر', symbol: 'EGP', rate: 15.69 },
   { name: 'الإمارات', symbol: 'AED', rate: 3.67 },
@@ -37,6 +40,26 @@ let isOpen = ref(false);
 let isLTR = ref(false);
 let selectedCountry = ref('السعودية');
 let message = ref('');
+let categories = ref([]);
+
+const loadCategories = async () => {
+  // fetch categories
+  const query = gql`
+    query {
+      categoryGetAll {
+        title
+        slug
+      }
+    }
+  `;
+  const data = await request(endpoint, query);
+  categories = data.categoryGetAll;
+
+  categories.forEach(element => {
+    console.log(element.title);
+  });
+}
+loadCategories();
 
 
 const toggleDirection = () => {
@@ -113,16 +136,13 @@ const handleOK = () => {
   </header>
   <nav class="nav">
     <ul>
-      <!-- placeholders -->
-      <li>تواصل معنا</li>
-      <li>المدونة</li>
-      <li>العروض</li>
-      <li>المتجر</li>
-      <li>الرئيسية</li>
+      <li  v-if="categories" v-for="category in categories" :key="category.id">
+        <!-- needs language support -->
+        {{ category.title }}
+      </li>
       <li>
         <MenuOutlined />
       </li>
-
     </ul>
   </nav>
   <p class="ar">{{ message }}</p>
