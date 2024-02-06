@@ -5,6 +5,8 @@ import { ref } from "vue";
 const endpoint = 'http://localhost:4000/graphql'
 let products = ref(null);
 
+let similarProductsTitle = "المنتجات المتشابهة"
+let moreLikeThisTitle = "المزيد من هذه الماركة"
 
 const loadProducts = async () => {
   const query = gql`
@@ -46,5 +48,13 @@ products.value?.productGetAllWithImages.forEach(async (product) => {
 
 
 <template>
-  <LazyProductSlidersCard :products="products.productGetAllWithImages"/>
+
+  <LazyProductSlidersCard :products="products.productGetAllWithImages" :title="similarProductsTitle" />
+  <LazyProductSlidersCard :products="products.productGetAllWithImages" :title="moreLikeThisTitle" />
 </template>
+
+<style scoped>
+
+
+
+</style>

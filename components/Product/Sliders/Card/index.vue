@@ -2,9 +2,15 @@
 import { defineProps } from 'vue'
 import { ref } from 'vue'
 
+const expanded = ref(false)
+
 const props = defineProps({
   products: {
     type: Array,
+    required: true
+  },
+  title: {
+    type: String,
     required: true
   }
 })
@@ -20,17 +26,22 @@ const scroll = (direction) => {
 
 <template>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <div class="heading">
+    <p class="clickable" @click="expanded = !expanded">شاهد المزيد</p>
+      <p class="ar">{{ title }}</p>
 
+    </div>
   <div class="antialiased text-gray-900 ">
-    <div class="min-h-screen p-8 items-center justify-center flex">
+    <div class="p-8 items-center justify-center flex">
 
       <button @click="scroll(-1)">←</button>
 
       <!-- start of card -->
-      <div ref="scrollContainer" class="flex overflow-x-scroll no-scrollbar scroll-container">
+      <div ref="scrollContainer" class="flex overflow-x-scroll no-scrollbar scroll-container" :style="{ flexWrap: expanded ? 'wrap' : 'nowrap' }">
 
         <div v-if="products" v-for="product in products" :key="product.product_id">
-          <div class="bg-white rounded-lg overflow-hidden shadow-2xl p-6 w-80">
+          <div class="bg-white rounded-lg overflow-hidden shadow-2xl p-6 w-80"
+           :style="{ width: expanded ?  flex: '0 0 auto' }">
             <!--E11-->
             <!-- <div class="h-48 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80')"></div> -->
             <img class="h-48 w-full object-cover object-end"
@@ -81,5 +92,22 @@ const scroll = (direction) => {
   }
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+.heading {
+  display: flex;
+  align-items: center;
+  margin: 0 50px 0 50px;
+  justify-content: space-between;
+}
+ .clickable {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 500;
+  color: #939393;
+}
+.ar {
+  text-align: right;
+  font-size: 36px;
+  font-weight: 700;
 }
 </style>
