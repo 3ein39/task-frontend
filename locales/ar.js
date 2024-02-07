@@ -1,3 +1,4 @@
 export default {
-    welcome: "أهلا بك",
+    login: "تسجيل الدخول",
+    logout: "تسجيل الخروج",
 }

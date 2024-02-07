@@ -4,6 +4,15 @@ import { Space, Input, Dropdown, Typography, Menu } from 'ant-design-vue';
 const { Search } = Input;
 import { ref } from 'vue'
 import { gql, request } from 'graphql-request'
+import { useI18n } from 'vue-i18n'
+import { inject } from 'vue';
+const locale = inject('locale');
+
+
+// be in arabic by default
+if (process.client)
+  document.dir = 'rtl';
+console.log('locale', locale.value);
 
 
 const endpoint = 'http://localhost:4000/graphql'
@@ -66,6 +75,10 @@ const toggleDirection = () => {
   isLTR.value = !isLTR.value;
   document.dir = isLTR.value ? 'ltr' : 'rtl';
   document.querySelector('html').setAttribute('lang', isLTR.value ? 'en' : 'ar');
+
+  locale.value = isLTR.value ? 'en' : 'ar';
+
+  console.log('locale', locale.value);
   console.log('isLTR', isLTR.value);
 }
 
@@ -94,25 +107,6 @@ const handleOK = () => {
   </a-modal>
   <header>
     <div class="left-pane">
-      <p @click="toggleDirection" class="btn">EN</p>
-      <img src="assets/icons/cart.png" alt="" srcset="">
-      <p class="ar btn" @click="fakeLogin" v-if="!isLoggedIn">تسجيل الدخول</p>
-      <p class="btn" @click="fakeLogin" v-if="isLoggedIn">تسجيل الخروج</p>
-    </div>
-
-
-    <div class="mid-pane">
-      <div class="flex flex-row-reverse w-full">
-        <input class="w-full px-4 py-2 rounded-r-md focus:outline-none focus:ring-0" type="text"
-          placeholder="input search text" />
-        <!-- recent searches and overlay to be implemented -->
-        <button @click="isFinished" class="px-4 py-2 text-white rounded-l-md" style="background-color: #FFBD1F;">
-          <img src="/assets/icons/search.png" alt="Search" />
-        </button>
-      </div>
-    </div>
-
-    <div class="right-pane">
       <a-dropdown class="ship-info" :trigger="['click']">
         <div class="dropdown-link-container">
           <a class="ant-dropdown-link" @click.prevent>
@@ -133,10 +127,33 @@ const handleOK = () => {
       </a-dropdown>
       <img src="assets/icons/logo.png" alt="" srcset="">
     </div>
+
+
+    <div class="mid-pane">
+      <div class="flex flex-row w-full">
+        <input class="w-full px-4 py-2 rounded-r-md focus:outline-none focus:ring-0" type="text"
+          placeholder="input search text" />
+        <!-- recent searches and overlay to be implemented -->
+        <button @click="isFinished" class="px-4 py-2 text-white rounded-l-md" style="background-color: #FFBD1F;">
+          <img src="/assets/icons/search.png" alt="Search" />
+        </button>
+      </div>
+    </div>
+
+    <div class="right-pane">
+
+      <p @click="toggleDirection" class="btn">EN</p>
+      <img src="assets/icons/cart.png" alt="" srcset="">
+      <p class="ar btn" @click="fakeLogin" v-if="!isLoggedIn">{{ $t('login') }} </p>
+      <p class="btn" @click="fakeLogin" v-if="isLoggedIn"> {{ $t('logout') }}</p>
+
+
+
+    </div>
   </header>
   <nav class="nav">
     <ul>
-      <li  v-if="categories" v-for="category in categories" :key="category.id">
+      <li v-if="categories" v-for="category in categories" :key="category.id">
         <!-- needs language support -->
         {{ category.title }}
       </li>
@@ -191,6 +208,7 @@ header {
 .mid-pane,
 .right-pane {
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
   color: white;
   height: 37px;
