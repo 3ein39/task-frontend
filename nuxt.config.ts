@@ -14,7 +14,7 @@ export default defineNuxtConfig({
             { code: 'ar', file: 'ar.js' },
         ],
         defaultLocale: 'ar',
-        detectBrowserLanguage: false,
+        // detectBrowserLanguage: false,
         lazy: true,
         langDir: 'locales/'
     }
