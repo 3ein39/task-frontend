@@ -7,23 +7,24 @@ import { gql, request } from 'graphql-request'
 import { useI18n } from 'vue-i18n'
 import { inject } from 'vue';
 const locale = inject('locale');
+const { t } = useI18n();
 
 
-// be in arabic by default
 if (process.client)
-  document.dir = 'rtl';
+  document.dir = 'ltr';
 console.log('locale', locale.value);
 
-
 const endpoint = 'http://localhost:4000/graphql'
-const countries = [
-  { name: 'مصر', symbol: 'EGP', rate: 15.69 },
-  { name: 'الإمارات', symbol: 'AED', rate: 3.67 },
-  { name: 'السعودية', symbol: 'SAR', rate: 3.75 },
-  { name: 'الأردن', symbol: 'JOD', rate: 0.71 },
-  { name: 'قطر', symbol: 'QAR', rate: 3.64 },
-  { name: 'الكويت', symbol: 'KWD', rate: 0.30 },
-];
+
+
+let countries = computed(() => [
+  { name: t('egypt'), symbol: t('egyptCurrency'), rate: 15.69 },
+  { name: t('unitedArabEmirates'), symbol: t('unitedArabEmiratesCurrency'), rate: 3.67 },
+  { name: t('saudiArabia'), symbol: t('saudiArabiaCurrency'), rate: 3.75 },
+  { name: t('jordan'), symbol: t('jordanCurrency'), rate: 0.71 },
+  { name: t('qatar'), symbol: t('qatarCurrency'), rate: 3.64 },
+  { name: t('kuwait'), symbol: t('kuwaitCurrency'), rate: 0.30 }
+]);
 
 const currencySymbol = computed(() => {
   const country = countries.find(c => c.name === selectedCountry.value);
@@ -46,8 +47,8 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 let isLoggedIn = ref(false);
 let isOpen = ref(false);
-let isLTR = ref(false);
-let selectedCountry = ref('السعودية');
+let isLTR = ref(true);
+let selectedCountry = ref(t('saudiArabia'));
 let message = ref('');
 let categories = ref([]);
 
@@ -78,6 +79,7 @@ const toggleDirection = () => {
 
   locale.value = isLTR.value ? 'en' : 'ar';
 
+  console.log('countries', countries);
   console.log('locale', locale.value);
   console.log('isLTR', isLTR.value);
 }
@@ -86,7 +88,7 @@ const fakeLogin = () => {
   isLoggedIn.value = !isLoggedIn.value;
 
   // better to be implemented with something like flash 
-  message.value = isLoggedIn.value ? 'تم تسجيل الدخول بنجاح' : 'تم تسجيل الخروج بنجاح';
+  message.value = isLoggedIn.value ? t('loggedIn') : t('loggedOut');
   setTimeout(() => {
     message.value = '';
   }, 2000);
@@ -98,7 +100,8 @@ const isFinished = () => {
 const handleOK = () => {
   isOpen.value = false;
 }
-
+const roundedClass = computed(() => (isLTR.value ? 'rounded-l-md' : 'rounded-r-md'));
+const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r-md'));
 </script>
 
 <template>
@@ -107,45 +110,51 @@ const handleOK = () => {
   </a-modal>
   <header>
     <div class="left-pane">
+
       <a-dropdown class="ship-info" :trigger="['click']">
         <div class="dropdown-link-container">
           <a class="ant-dropdown-link" @click.prevent>
             <DownOutlined />
           </a>
           <div class="dropdown-link-text">
-            <p> الشحن إلى</p>
+            <p> {{ $t('shipTo') }}</p>
             <p> {{ selectedCountry }} </p>
           </div>
         </div>
         <template #overlay>
           <a-menu>
-            <a-menu-item v-for="country in countries" :key="country.name" @click="changeCountry(country.name)">
-              {{ country.name }}
+            <a-menu-item v-for="country in countries" :key="index" @click="changeCountry(country.name)">
+              {{ $t(country.name) }}
             </a-menu-item>
           </a-menu>
         </template>
       </a-dropdown>
       <img src="assets/icons/logo.png" alt="" srcset="">
+
+
     </div>
 
 
     <div class="mid-pane">
       <div class="flex flex-row w-full">
-        <input class="w-full px-4 py-2 rounded-r-md focus:outline-none focus:ring-0" type="text"
+          <input :class="['w-full', 'py-2','px-4' ,'focus:outline-none', 'focus:ring-0', roundedClass]" type="text"
           placeholder="input search text" />
         <!-- recent searches and overlay to be implemented -->
-        <button @click="isFinished" class="px-4 py-2 text-white rounded-l-md" style="background-color: #FFBD1F;">
-          <img src="/assets/icons/search.png" alt="Search" />
+        <button @click="isFinished" :class="['py-2', 'text-white','px-4', roundedClassX]" style="background-color: #FFBD1F;">
+            <img src="/assets/icons/search.png" alt="Search" />
         </button>
       </div>
     </div>
 
     <div class="right-pane">
 
-      <p @click="toggleDirection" class="btn">EN</p>
+      <p @click="toggleDirection" class="btn" v-if="!isLTR"> EN </p>
+      <p @click="toggleDirection" class="btn" v-if="isLTR"> AR </p>
+
       <img src="assets/icons/cart.png" alt="" srcset="">
-      <p class="ar btn" @click="fakeLogin" v-if="!isLoggedIn">{{ $t('login') }} </p>
+      <p class="btn" @click="fakeLogin" v-if="!isLoggedIn">{{ $t('login') }} </p>
       <p class="btn" @click="fakeLogin" v-if="isLoggedIn"> {{ $t('logout') }}</p>
+
 
 
 
