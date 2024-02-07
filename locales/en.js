@@ -1,6 +1,8 @@
 export default {
     login: "Login",
+    loggedIn: "Logged In",
     logout: "Logout",
+    loggedOut: "Logged Out",
     egypt: "Egypt",
     egyptCurrency: "EGP",
     saudiArabiaCurrency: "SAR",
@@ -13,5 +15,5 @@ export default {
     kuwait: "Kuwait",
     qatar: "Qatar",
     jordan: "Jordan",
-
+    shipTo: "Ship To",
 }

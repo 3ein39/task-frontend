@@ -1,6 +1,8 @@
 export default {
     login: "تسجيل الدخول",
+    loggedIn: "تم تسجيل الدخول",
     logout: "تسجيل الخروج",
+    loggedOut: "تم تسجيل الخروج",
     egypt: "مصر",
     egyptCurrency: "ج. م.",
     saudiArabiaCurrency: "ر.س.",
@@ -13,4 +15,5 @@ export default {
     kuwait: "الكويت",
     qatar: "قطر",
     jordan: "الأردن",
+    shipTo: "الشحن إلى",
 }
