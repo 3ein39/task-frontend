@@ -6,6 +6,7 @@ import { ref } from 'vue'
 import { gql, request } from 'graphql-request'
 import { useI18n } from 'vue-i18n'
 import { inject } from 'vue';
+import { state } from '../states'
 const { t } = useI18n();
 
 
@@ -30,32 +31,27 @@ console.log('locale', locale.value);
 const endpoint = 'http://localhost:4000/graphql'
 
 
-let countries = computed(() => [
-  { name: t('egypt'), symbol: t('egyptCurrency'), rate: 15.69 },
-  { name: t('unitedArabEmirates'), symbol: t('unitedArabEmiratesCurrency'), rate: 3.67 },
-  { name: t('saudiArabia'), symbol: t('saudiArabiaCurrency'), rate: 3.75 },
-  { name: t('jordan'), symbol: t('jordanCurrency'), rate: 0.71 },
-  { name: t('qatar'), symbol: t('qatarCurrency'), rate: 3.64 },
-  { name: t('kuwait'), symbol: t('kuwaitCurrency'), rate: 0.30 }
-]);
+let countries = inject('countries');
 
-const currencySymbol = computed(() => {
-  const country = countries.find(c => c.name === selectedCountry.value);
+const currencySymbol = () => {
+  const country = countries.value.find(c => c.name === selectedCountry.value);
   return country ? country.symbol : '';
-});
+};
 
 const convertPrice = (priceInUSD) => {
-  const country = countries.find(c => c.name === selectedCountry.value);
+  const country = countries.value.find(c => c.name === selectedCountry.value);
   return country ? priceInUSD * country.rate : priceInUSD;
 };
 
 const changeCountry = (country) => {
   selectedCountry.value = country;
+  console.log('selected country changed', selectedCountry.value)
   // logic to change currency
+  state.symbol = currencySymbol(selectedCountry)
 
-  // logic to change price
+  // actual price to be added
+  state.newPrice = convertPrice(100)
 };
-
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 

@@ -1,7 +1,8 @@
 <script setup>
 import {Breadcrumb} from 'ant-design-vue'
 import {gql, request} from 'graphql-request'
-import {ref} from "vue";
+import { ref } from "vue";
+import { state } from '../../states'
 
 const locale = inject('locale')
 const selectedCountry = inject('selectedCountry')
@@ -75,6 +76,7 @@ const routes = [
       <div class="left-main">
        <div class="product-details">
         <h1>{{ selectedCountry }}</h1>
+        <h1>{{ state.symbol }} {{ state.newPrice }}</h1>
         <h1>{{ productDetails.productGetByID.title }}</h1>
         <p>{{ productDetails.productGetByID.description }}</p>
         <p>Brand: {{ productDetails.productGetByID.brand }}</p>
