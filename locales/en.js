@@ -21,4 +21,7 @@ export default {
     ratings: "Ratings",
     benefits: "Benefits",
     overview: "Overview",
+    class: "Gender",
+    capacity: "Capacity",
+    modelNo: "Model No",
 }

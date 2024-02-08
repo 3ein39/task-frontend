@@ -21,4 +21,7 @@ export default {
     ratings: "التقييمات",
     benefits: "الميزات الأساسية",
     overview: "نظرة عامة",
+    class: 'القسم',
+    capacity: 'الحجم',
+    modelNo: 'رقم الموديل'
 }
