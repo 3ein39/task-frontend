@@ -1,7 +1,7 @@
 <script setup>
 import {Breadcrumb} from 'ant-design-vue'
 import {gql, request} from 'graphql-request'
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { state } from '../../states'
 
 const locale = inject('locale')
@@ -15,7 +15,7 @@ let productRatings = ref(null);
 const loadProductDetails = async () => {
   const productByIDQuery = gql`
   query {
-      productGetByID(product_id: 1) {
+      productGetByID(product_id: 1, locale: "${locale.value}") {
         product_id
         title
         description
@@ -51,6 +51,7 @@ const loadProductDetails = async () => {
   productRatings.value = productDetails.value.productGetRatingsByID
 }
 loadProductDetails()
+watch(locale, loadProductDetails, { immediate: true });
 
 // console.log(data)
 const routes = [
