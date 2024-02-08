@@ -19,4 +19,6 @@ export default {
     information: "معلومات",
     details: "تفاصيل",
     ratings: "التقييمات",
+    benefits: "الميزات الأساسية",
+    overview: "نظرة عامة",
 }

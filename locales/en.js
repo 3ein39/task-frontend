@@ -19,4 +19,6 @@ export default {
     information: "Information",
     details: "Details",
     ratings: "Ratings",
+    benefits: "Benefits",
+    overview: "Overview",
 }
