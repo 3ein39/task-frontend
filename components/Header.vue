@@ -167,13 +167,14 @@ const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r
   </header>
   <nav class="nav">
     <ul>
+       <li>
+          <MenuOutlined />
+        </li>
       <li v-if="categories" v-for="category in categories" :key="category.id">
         <!-- needs language support -->
         {{ category.title }}
       </li>
-      <li>
-        <MenuOutlined />
-      </li>
+     
     </ul>
   </nav>
   <p class="ar">{{ message }}</p>
@@ -247,7 +248,7 @@ p.ar {
 
 .nav {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   gap: 25px;
   height: 57px;
