@@ -6,8 +6,21 @@ import { ref } from 'vue'
 import { gql, request } from 'graphql-request'
 import { useI18n } from 'vue-i18n'
 import { inject } from 'vue';
-const locale = inject('locale');
 const { t } = useI18n();
+
+
+const locale = inject('locale');
+let selectedCountry = inject('selectedCountry');
+
+let isLoggedIn = ref(false);
+let isOpen = ref(false);
+let isLTR = ref(true);
+let message = ref('');
+let categories = ref([]);
+
+
+
+
 
 
 if (process.client)
@@ -39,18 +52,14 @@ const convertPrice = (priceInUSD) => {
 const changeCountry = (country) => {
   selectedCountry.value = country;
   // logic to change currency
+
   // logic to change price
 };
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
-let isLoggedIn = ref(false);
-let isOpen = ref(false);
-let isLTR = ref(true);
-let selectedCountry = ref(t('saudiArabia'));
-let message = ref('');
-let categories = ref([]);
+
 
 const loadCategories = async () => {
   // fetch categories

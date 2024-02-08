@@ -3,6 +3,9 @@ import {Breadcrumb} from 'ant-design-vue'
 import {gql, request} from 'graphql-request'
 import {ref} from "vue";
 
+const locale = inject('locale')
+const selectedCountry = inject('selectedCountry')
+
 const endpoint = 'http://localhost:4000/graphql'
 let productDetails = ref(null);
 let productImages = ref(null);
@@ -59,6 +62,7 @@ const routes = [
     breadcrumbName: 'category 1'
   }
 ]
+
 </script>
 
 <template>
@@ -70,6 +74,7 @@ const routes = [
     <div class="main-product">
       <div class="left-main">
        <div class="product-details">
+        <h1>{{ selectedCountry }}</h1>
         <h1>{{ productDetails.productGetByID.title }}</h1>
         <p>{{ productDetails.productGetByID.description }}</p>
         <p>Brand: {{ productDetails.productGetByID.brand }}</p>
