@@ -109,6 +109,7 @@ const routes = [
 
 .main-product {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
   gap: 20px;
   margin: 20px;

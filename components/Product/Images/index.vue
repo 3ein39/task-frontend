@@ -1,12 +1,12 @@
 <template>
   <div v-if="productImages" class="image-carousel">
-    <div class="main-image">
-      <img :src="productImages[0].url" alt="Main Image" width="373" height="520" @mouseover="zoomIn" @mouseout="zoomOut">
-    </div>
     <div class="thumbnail-images">
       <div v-for="(image, index) in productImages.slice(1)" :key="index" class="thumbnail-image">
         <img :src="image.url" alt="Thumbnail Image" width="50" height="50">
       </div>
+    </div>
+    <div class="main-image">
+      <img :src="productImages[0].url" alt="Main Image" width="373" height="520" @mouseover="zoomIn" @mouseout="zoomOut">
     </div>
   </div>
 </template>
@@ -38,6 +38,7 @@ const zoomOut = () => {
   display: flex;
   align-items: flex-start;
 }
+
 .main-image {
   width: 373px;
   height: 520px;
@@ -68,11 +69,10 @@ const zoomOut = () => {
   .image-carousel {
     flex-direction: column;
   }
+
   .thumbnail-images {
     display: flex;
     flex-direction: row;
   }
 }
-
-
 </style>
