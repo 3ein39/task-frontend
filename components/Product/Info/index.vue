@@ -2,12 +2,14 @@
 import { Tabs } from 'ant-design-vue';
 import { defineProps } from 'vue';
 import { ref } from 'vue'
-
-const tabs = [
-  { title: 'معلومات', content: 'Tab 1 content' },
-  { title: 'تفاصيل', content: 'Tab 2 content' },
-  { title: 'التقييم', content: 'Tab 3 content' }
-];
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n();
+const locale = inject('locale');
+const tabs = computed(() => [
+  { title: t('information'), content: 'Tab 1 content' },
+  { title: t('details'), content: 'Tab 2 content' },
+  { title: t('ratings'), content: 'Tab 3 content' }
+])
 
 const activeTab = ref(0);
 
@@ -18,16 +20,16 @@ const props = defineProps({
 })
 </script>
 
-<template>
-  <div class="flex flex-col w-full px-16 py-32" dir="rtl">
+<template> 
+  <div class="flex flex-col w-full px-16 py-32">
     <div class="flex mb-4">
       <div v-for="(tab, index) in tabs" :key="index" class="cursor-pointer py-2 mx-14 px-2 tab-nav"
         :class="{ 'tab-border in-focus': activeTab === index }" @click="activeTab = index">
         {{ tab.title }}
       </div>
     </div>
-    <div class="tab-content">
-      <div v-for="(tab, index) in tabs" :key="index" v-show="activeTab === index">
+    <div class="tab-content flex mb-4">
+      <div class=" py-2 mx-14 px-2" v-for="(tab, index) in tabs" :key="index" v-show="activeTab === index">
         {{ tab.content }}
       </div>
     </div>

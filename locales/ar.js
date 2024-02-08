@@ -16,4 +16,7 @@ export default {
     qatar: "قطر",
     jordan: "الأردن",
     shipTo: "الشحن إلى",
+    information: "معلومات",
+    details: "تفاصيل",
+    ratings: "التقييمات",
 }
