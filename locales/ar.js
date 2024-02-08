@@ -23,5 +23,8 @@ export default {
     overview: "نظرة عامة",
     class: 'القسم',
     capacity: 'الحجم',
-    modelNo: 'رقم الموديل'
+    modelNo: 'رقم الموديل',
+    similarProducts: "المنتجات المتشابهة",
+    moreFromThisBrand: 'المزيد من هذه الماركة',
+    seeMore: 'شاهد المزيد',
 }

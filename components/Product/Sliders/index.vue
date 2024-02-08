@@ -2,11 +2,12 @@
 import { gql, request } from 'graphql-request'
 import { ref } from "vue";
 
+const { t } = useI18n()
 const endpoint = 'http://localhost:4000/graphql'
 let products = ref(null);
 
-let similarProductsTitle = "المنتجات المتشابهة"
-let moreLikeThisTitle = "المزيد من هذه الماركة"
+let similarProductsTitle = 'similarProducts'
+let moreLikeThisTitle = 'moreFromThisBrand'
 
 const loadProducts = async () => {
   const query = gql`

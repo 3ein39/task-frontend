@@ -24,4 +24,7 @@ export default {
     class: "Gender",
     capacity: "Capacity",
     modelNo: "Model No",
+    similarProducts: "Similar Products",
+    moreFromThisBrand: 'More like this',
+    seeMore: 'See More'
 }
