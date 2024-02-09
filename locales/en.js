@@ -38,4 +38,5 @@ export default {
     discount: 'Discount',
     pckgs: 'Packages',
     addToCart: 'Add to Cart',
+    bestValue: 'Best value'
 }

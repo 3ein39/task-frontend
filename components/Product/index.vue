@@ -181,50 +181,50 @@ const addToCart = () => {
               <fieldset class="border-4 p-2 rounded-lg" :style="{ borderColor: '#036C46' }">
                 <legend class="rounded-lg p-1"
                   :style="{ backgroundColor: '#036C46', color: '#ffffff', padding: '8px, 4px, 8px, 4px', fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 500, lineHeight: '29px', letterSpacing: '0em' }">
-                  افضل قيمة</legend>
+                  {{ $t('bestValue') }}</legend>
                 <div class="flex-row items-center">
                   <p>3 {{ $t('pckgs') }}</p>
                   <!-- price before and after discount -->
                   <div class="flex">
                     <p
                       :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
-                      {{ state.price }} {{ state.symbol }}</p>
+                      {{ state.discountedPrice*3 }} {{ state.symbol }}</p>
                     <p :style="{
                       fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '14px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
                       textDecoration: 'line-through'
-                    }">{{ state.discountedPrice }} {{ state.symbol }}</p>
+                    }">{{ state.price*3 }} {{ state.symbol }}</p>
                   </div>
 
                 </div>
               </fieldset>
               <fieldset class="border-4 p-2 rounded-lg">
                 <div class="flex-row items-center">
-                  <p>3 {{ $t('pckgs') }}</p>
+                  <p>6 {{ $t('pckgs') }}</p>
                   <!-- price before and after discount -->
                   <div class="flex">
                     <p
                       :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
-                      {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+                      {{ state.discountedPrice*6 }} {{ state.symbol }}</p>
                     <p :style="{
                       fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '14px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
                       textDecoration: 'line-through'
-                    }">{{ productDetails.productGetByID.discounted_price }} {{ state.symbol }}</p>
+                    }">{{ state.price*6 }} {{ state.symbol }}</p>
                   </div>
 
                 </div>
               </fieldset>
               <fieldset class="border-4 p-2 rounded-lg">
                 <div class="flex-row items-center">
-                  <p>3 {{ $t('pckgs') }}</p>
+                  <p>9 {{ $t('pckgs') }}</p>
                   <!-- price before and after discount -->
                   <div class="flex">
                     <p
                       :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
-                      {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+                      {{ state.discountedPrice*9 }} {{ state.symbol }}</p>
                     <p :style="{
                       fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '14px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
                       textDecoration: 'line-through'
-                    }">{{ productDetails.productGetByID.discounted_price }} {{ state.symbol }}</p>
+                    }">{{ state.price * 9 }} {{ state.symbol }}</p>
                   </div>
 
                 </div>
