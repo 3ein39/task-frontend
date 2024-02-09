@@ -1,12 +1,12 @@
 <template>
   <div v-if="productImages" class="image-carousel">
     <div class="thumbnail-images">
-      <div v-for="(image, index) in productImages.slice(1)" :key="index" class="thumbnail-image">
+      <div v-for="(image, index) in productImages.slice(1)" :key="index" class="thumbnail-image" @click="swapImage(image)">
         <img :src="image.url" alt="Thumbnail Image" width="50" height="50">
       </div>
     </div>
     <div class="main-image relative">
-      <img :src="productImages[0].url" alt="Main Image" width="373" height="520">
+      <img :src="mainImage.url" alt="Main Image" width="373" height="520">
       <svg @click="toggleFav" xmlns="http://www.w3.org/2000/svg" :fill="svgColor" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#939393"
         :class="locale === 'en' ? 'w-12 h-12 absolute top-0 left-10' : 'w-12 h-12 absolute top-0 right-10'">
         <path strokeLinecap="round" strokeLinejoin="round"
@@ -20,14 +20,24 @@
 import { defineProps } from 'vue';
 let locale = inject('locale');
 
-let svgColor = ref('white');
-
 const props = defineProps({
   productImages: {
     type: Array,
     required: true,
   },
 });
+
+let mainImage = ref(props.productImages[0]);
+
+let svgColor = ref('white');
+
+
+
+const swapImage = (image) => {
+  let temp = mainImage.value;
+  mainImage.value = image;
+  image = temp;
+};
 
 const toggleFav = () => {
   if (svgColor.value === 'white') {
