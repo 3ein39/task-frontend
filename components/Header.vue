@@ -54,7 +54,7 @@ const changeCountry = (country) => {
   state.symbol = currencySymbol(selectedCountry)
 
   // actual price to be added
-  state.price = convertPrice(state.priceBase) 
+  state.price = convertPrice(state.priceBase)
   state.discountedPrice = convertPrice(state.discountBase)
 };
 // watch(() => selectedCountry, (newVal, oldVal) => {
@@ -117,6 +117,28 @@ const handleOK = () => {
 }
 const roundedClass = computed(() => (isLTR.value ? 'rounded-l-md' : 'rounded-r-md'));
 const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r-md'));
+
+let showSearchOverlay = ref(false);
+
+const showOverlay = () => {
+  showSearchOverlay.value = true;
+};
+
+const hideOverlay = () => {
+  showSearchOverlay.value = false;
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown);
+});
+
+const handleKeyDown = (event) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+    event.preventDefault();
+    showOverlay();
+  }
+};
+
 </script>
 
 <template>
@@ -138,7 +160,8 @@ const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r
         </div>
         <template #overlay>
           <a-menu>
-            <a-menu-item v-if="countries" v-for="(country, index) in countries" :key="index" @click="changeCountry(country.name)">
+            <a-menu-item v-if="countries" v-for="(country, index) in countries" :key="index"
+              @click="changeCountry(country.name)">
               {{ country.name }}
             </a-menu-item>
           </a-menu>
@@ -150,17 +173,33 @@ const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r
     </div>
 
 
-    <div class="mid-pane">
-      <div class="flex flex-row w-full">
-        <input :class="['w-full', 'py-2', 'px-4', 'focus:outline-none', 'focus:ring-0', roundedClass]" type="text"
-          placeholder="input search text" />
-        <!-- recent searches and overlay to be implemented -->
-        <button @click="isFinished" :class="['py-2', 'text-white', 'px-4', roundedClassX]"
-          style="background-color: #FFBD1F;">
-          <img src="/assets/icons/search.png" alt="Search" />
-        </button>
+    <div class="relative">
+      <div class="mid-pane relative z-10">
+          <form @submit.prevent="isFinished" class="flex flex-row w-full">
+            <input :class="['w-full', 'py-2', 'px-4', 'focus:outline-none', 'focus:ring-0', roundedClass]"
+              :style="{ color: 'black' }" type="text" placeholder="input search text" @click="showOverlay"
+              @keydown="handleKeyDown" />
+               <button @click="isFinished" :class="['py-2', 'text-white', 'px-4', roundedClassX]"
+              style="background-color: #FFBD1F;">
+              <img src="/assets/icons/search.png" alt="Search" />
+            </button>
+          </form>
+         
+        <!-- Fake recent searches -->
+        <div v-if="showSearchOverlay"
+          class="absolute top-full w-full bg-white border border-gray-200 z-10 p-6 rounded-b-lg">
+          <ul class="flex-col p-6">
+            <li class="px-4 py-2" :style="{ color: 'black' }">Recent search 1</li>
+            <li class="px-4 py-2" :style="{ color: 'black' }">Recent search 2</li>
+            <li class="px-4 py-2" :style="{ color: 'black' }">Recent search 3</li>
+          </ul>
+        </div>
+      </div>
+      <div v-if="showSearchOverlay" class="fixed inset-0 bg-black bg-opacity-50" @click="hideOverlay">
       </div>
     </div>
+
+
 
     <div class="right-pane">
 
