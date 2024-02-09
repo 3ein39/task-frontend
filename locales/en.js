@@ -37,4 +37,5 @@ export default {
     vatIncluded: 'VAT Included',
     discount: 'Discount',
     pckgs: 'Packages',
+    addToCart: 'Add to Cart',
 }

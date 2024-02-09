@@ -222,7 +222,17 @@ const routes = [
               </fieldset>
             </div>
             
-            
+            <div class="flex gap-4 items-center">
+              
+              <input type="number" min="1" class="border-2 border-gray-300 rounded-md text-center w-20"
+              :style="{ height: '64px', fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700}"
+              value="1"/>
+
+
+              <button class="py-2 px-10 rounded-md text-white" :style="{ justifyContent: 'space-between',width: '440px', height: '64px', backgroundColor: '#FFBD1F', borderRadius: '12px', fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
+                  {{ $t('addToCart') }}
+                </button>
+            </div>
 
           </div>
         </div>

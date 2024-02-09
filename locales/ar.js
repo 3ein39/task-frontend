@@ -37,4 +37,5 @@ export default {
     vatIncluded: 'شامل القيمة المضافة',
     discount: 'خصم',
     pckgs: 'عبوات',
+    addToCart: 'أضف إلى عربة التسوق',
 }
