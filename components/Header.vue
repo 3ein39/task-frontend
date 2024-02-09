@@ -57,21 +57,15 @@ const changeCountry = (country) => {
   state.price = convertPrice(state.priceBase)
   state.discountedPrice = convertPrice(state.discountBase)
 };
-// watch(() => selectedCountry, (newVal, oldVal) => {
-//   console.log('selectedCountry', newVal);
-//   console.log('oldVal', oldVal);
-//   changeCountry(newVal);
-// });
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 
 
 const loadCategories = async () => {
-  // fetch categories
   const query = gql`
     query {
-      categoryGetAll {
+      categoryGetAll(locale: "${locale.value}") {
         title
         slug
       }
@@ -81,6 +75,8 @@ const loadCategories = async () => {
   categories.value = data.categoryGetAll;
 }
 loadCategories();
+watch(locale, loadCategories, { immediate: true });
+
 
 
 const toggleDirection = () => {
