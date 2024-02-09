@@ -36,4 +36,5 @@ export default {
     saved: 'Saved',
     vatIncluded: 'VAT Included',
     discount: 'Discount',
+    pckgs: 'Packages',
 }

@@ -168,6 +168,62 @@ const routes = [
               </p>
             </div>
 
+            <div class="flex gap-8" :style="{ alignItems: 'baseline' }">
+              <fieldset class="border-4 p-2 rounded-lg" :style="{ borderColor: '#036C46' }">
+                <legend class="rounded-lg p-1"
+                  :style="{ backgroundColor: '#036C46', color: '#ffffff', padding: '8px, 4px, 8px, 4px', fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 500, lineHeight: '29px', letterSpacing: '0em' }">
+                  افضل قيمة</legend>
+                <div class="flex-row items-center">
+                  <p>3 {{ $t('pckgs') }}</p>
+                  <!-- price before and after discount -->
+                  <div class="flex">
+                    <p
+                      :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
+                      {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+                    <p :style="{
+                      fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '14px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
+                      textDecoration: 'line-through'
+                    }">{{ productDetails.productGetByID.discounted_price }} {{ state.symbol }}</p>
+                  </div>
+
+                </div>
+              </fieldset>
+              <fieldset class="border-4 p-2 rounded-lg">
+                <div class="flex-row items-center">
+                  <p>3 {{ $t('pckgs') }}</p>
+                  <!-- price before and after discount -->
+                  <div class="flex">
+                    <p
+                      :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
+                      {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+                    <p :style="{
+                      fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '14px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
+                      textDecoration: 'line-through'
+                    }">{{ productDetails.productGetByID.discounted_price }} {{ state.symbol }}</p>
+                  </div>
+
+                </div>
+              </fieldset>
+              <fieldset class="border-4 p-2 rounded-lg">
+                <div class="flex-row items-center">
+                  <p>3 {{ $t('pckgs') }}</p>
+                  <!-- price before and after discount -->
+                  <div class="flex">
+                    <p
+                      :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
+                      {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+                    <p :style="{
+                      fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '14px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
+                      textDecoration: 'line-through'
+                    }">{{ productDetails.productGetByID.discounted_price }} {{ state.symbol }}</p>
+                  </div>
+
+                </div>
+              </fieldset>
+            </div>
+            
+            
+
           </div>
         </div>
       </div>

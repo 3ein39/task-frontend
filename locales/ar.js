@@ -36,4 +36,5 @@ export default {
     saved: 'وفرت',
     vatIncluded: 'شامل القيمة المضافة',
     discount: 'خصم',
+    pckgs: 'عبوات',
 }
