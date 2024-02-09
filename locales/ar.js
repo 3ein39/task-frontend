@@ -30,4 +30,10 @@ export default {
     win: 'اكسب',
     points: 'نقاط',
     ratings: 'تقييمات',
+    productNumber: 'رقم المنتج',
+    before: 'قبل',
+    now: 'الآن',
+    saved: 'وفرت',
+    vatIncluded: 'شامل القيمة المضافة',
+    discount: 'خصم',
 }

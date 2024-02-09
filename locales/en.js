@@ -30,4 +30,10 @@ export default {
     win: 'Win',
     points: 'points',
     ratings: 'Ratings',
+    productNumber: 'Product Number',
+    before: 'Before',
+    now: 'Now',
+    saved: 'Saved',
+    vatIncluded: 'VAT Included',
+    discount: 'Discount',
 }

@@ -119,7 +119,7 @@ const routes = [
                 </svg>
                 <p
                   :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em', color: 'white' }">
-                   {{ productDetails.productAverageRating }} </p>
+                  {{ productDetails.productAverageRating }} </p>
 
               </div>
               <p
@@ -127,19 +127,48 @@ const routes = [
                 {{ productDetails.productGetRatingsCountByID }} {{ $t('ratings') }}</p>
             </div>
 
-          </div>
+            <p
+              :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '24px', fontWeight: 500, lineHeight: '29px', letterSpacing: '0em' }">
+              {{ $t('productNumber') }}: {{ productDetails.productGetByID.model_number }}</p>
 
-          <p>Brand: {{ productDetails.productGetByID.brand }}</p>
-          <p>Price: {{ productDetails.productGetByID.price }}</p>
-          <p>Discounted Price: {{ productDetails.productGetByID.discounted_price }}</p>
-          <p>VAT: {{ productDetails.productGetByID.vat }}</p>
-          <p>Gained Points: {{ productDetails.productGetByID.gained_points }}</p>
-          <p>Benefits: {{ productDetails.productGetByID.benefits }}</p>
-          <p>Overview: {{ productDetails.productGetByID.overview }}</p>
-          <p>Gender: {{ productDetails.productGetByID.gender }}</p>
-          <p>Capacity: {{ productDetails.productGetByID.capacity }}</p>
-          <p>Model Number: {{ productDetails.productGetByID.model_number }}</p>
-          <button class="btn">Add to cart</button>
+            <p :style="{
+              fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '18px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
+              textDecoration: 'line-through'
+            }">
+              {{ $t('before') }}: {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+
+            <p
+              :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '24px', fontWeight: 700, lineHeight: '29px', letterSpacing: '0em' }">
+              {{ $t('now') }}: <span :style="{ fontSize: '30px' }">{{ productDetails.productGetByID.discounted_price }} {{
+                state.symbol }} </span>
+              <span :style="{
+                fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '18px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393'
+              }">
+                ({{ $t('vatIncluded') }})
+              </span>
+            </p>
+
+            <!-- you saved x p -->
+            <div class="flex items-center gap-8">
+
+              <p
+                :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 500, lineHeight: '24px', letterSpacing: '0em' }">
+                {{ $t('saved') }}: {{ productDetails.productGetByID.price - productDetails.productGetByID.discounted_price
+                }}
+                {{
+                  state.symbol }}
+              <div class=" rounded-lg p-1 mx-8 text-white inline-flex items-center gap-2"
+                :style="{ backgroundColor: '#E53E3E', padding: '6px, 10px, 6px, 10px' }">
+                <p
+                  :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
+                  {{ $t('discount') }} {{ Math.round((productDetails.productGetByID.price -
+                    productDetails.productGetByID.discounted_price) / productDetails.productGetByID.price * 100) }}%
+                </p>
+              </div>
+              </p>
+            </div>
+
+          </div>
         </div>
       </div>
       <div class="right-main">
