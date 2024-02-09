@@ -38,5 +38,7 @@ export default {
     discount: 'خصم',
     pckgs: 'عبوات',
     addToCart: 'أضف إلى عربة التسوق',
-    bestValue: 'أفضل قيمة'
+    bestValue: 'أفضل قيمة',
+    brands: 'الماركات',
+    offers: 'العروض',
 }

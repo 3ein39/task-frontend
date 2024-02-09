@@ -220,10 +220,13 @@ const handleKeyDown = (event) => {
       <li>
         <MenuOutlined />
       </li>
-      <li v-if="categories" v-for="category in categories" :key="category.id">
-        <!-- needs language support -->
+      <li v-if="categories" v-for="category in categories" :key="category.id"
+      :style="{ color: 'white', fontWeight: '700', fontSize: '18px', fontFamily: locale === 'ar' ? 'var(--p-font-ar)' : 'var(--p-font-en)'}"
+      >
         {{ category.title }}
       </li>
+      <li :style="{ color: 'white', fontWeight: '700', fontSize: '18px', fontFamily: locale === 'ar' ? 'var(--p-font-ar)' : 'var(--p-font-en)' }">{{ $t('brands') }} </li>
+        <li :style="{ color: 'white', fontWeight: '700', fontSize: '18px', fontFamily: locale === 'ar' ? 'var(--p-font-ar)' : 'var(--p-font-en)' }"> {{ $t('offers') }} </li>
 
     </ul>
   </nav>
