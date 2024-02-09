@@ -43,7 +43,9 @@ const loadProductDetails = async () => {
         user {
           username
         }
-    }
+    },
+    productGetRatingsCountByID(product_id: 1),
+     productAverageRating(product_id: 1)
   }
   `
   productDetails.value = await request(endpoint, productByIDQuery)
@@ -75,22 +77,58 @@ const routes = [
     <div class="main-product">
       <div class="left-main">
         <div class="product-details">
-          <div class="border-2 border-gray-400 mb-8 flex items-center" :style="{ width: '584px', height: '89px', borderRadius: '18px' }">
-            <img src="https://static.thcdn.com/images/large/webp/productimg/1600/1600/11423416-1554493886910365.jpg" alt="description"
-              :style="{ width: '156px', height: '85px', borderRadius: '18px' }">
-              <div class="flex-col" :style="{ width: '169px', height: '55px' }">
-                <p class="mb-4" :style="{ fontFamily: 'Montserrat', fontSize: '20px', fontWeight: 500, lineHeight: '24px', letterSpacing: '0em', textAlign: 'left' }">
-                  ORIGINIAL 100%
-                </p>
-                <p :style="{ fontFamily: 'Montserrat-Arabic', fontSize: '16px', fontWeight: 500, lineHeight: '20px', letterSpacing: '0em', textAlign: 'left', color: '#939393' }">
-                    المزيد من هذه الماركة
-                </p>
-              </div>
+          <div class="border-2 border-gray-400 mb-8 flex items-center"
+            :style="{ width: '584px', height: '89px', borderRadius: '18px' }">
+            <img src="https://static.thcdn.com/images/large/webp/productimg/1600/1600/11423416-1554493886910365.jpg"
+              alt="description" :style="{ width: '156px', height: '85px', borderRadius: '18px' }">
+            <div class="flex-col" :style="{ width: '169px', height: '55px' }">
+              <p class="mb-4"
+                :style="{ fontFamily: 'Montserrat', fontSize: '20px', fontWeight: 500, lineHeight: '24px', letterSpacing: '0em', textAlign: 'left' }">
+                ORIGINIAL 100%
+              </p>
+              <p
+                :style="{ fontFamily: 'Montserrat-Arabic', fontSize: '16px', fontWeight: 500, lineHeight: '20px', letterSpacing: '0em', textAlign: 'left', color: '#939393' }">
+                المزيد من هذه الماركة
+              </p>
+            </div>
           </div>
-          <h1>{{ selectedCountry }}</h1>
-          <h1>{{ state.symbol }} {{ state.newPrice }}</h1>
-          <h1>{{ productDetails.productGetByID.title }}</h1>
-          <p>{{ productDetails.productGetByID.description }}</p>
+          <div class="space-y-5 flex-col items-end" :style="{ width: '574px', height: '503px' }">
+            <div class="flex justify-between items-center">
+              <p
+                :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '28px', fontWeight: 700, lineHeight: '34px', letterSpacing: '0em', textAlign: 'right' }">
+                {{ productDetails.productGetByID.title }}
+              </p>
+              <p
+                :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '22px', fontWeight: 500, lineHeight: '26px', textAlign: 'right', color: '#036C46' }">
+                {{ $t('win') }} {{ productDetails.productGetByID.gained_points }} {{ $t('points') }}
+              </p>
+            </div>
+
+            <p
+              :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '24px', fontWeight: 400, lineHeight: '29px', letterSpacing: '0em', color: '#939393' }">
+              {{ productDetails.productGetByID.description }}</p>
+
+
+            <div class="flex items-center gap-8">
+              <div class="bg-green-800 rounded-lg p-2 text-white inline-flex items-center gap-2"
+                :style="{ backgroundColor: '#024B31' }">
+                <svg class="w-4 h-4 text-white ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor" viewBox="0 0 22 20">
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                </svg>
+                <p
+                  :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em', color: 'white' }">
+                   {{ productDetails.productAverageRating }} </p>
+
+              </div>
+              <p
+                :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 500, lineHeight: '24px', letterSpacing: '0em', color: '#036C46' }">
+                {{ productDetails.productGetRatingsCountByID }} {{ $t('ratings') }}</p>
+            </div>
+
+          </div>
+
           <p>Brand: {{ productDetails.productGetByID.brand }}</p>
           <p>Price: {{ productDetails.productGetByID.price }}</p>
           <p>Discounted Price: {{ productDetails.productGetByID.discounted_price }}</p>

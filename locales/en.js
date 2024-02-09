@@ -26,5 +26,8 @@ export default {
     modelNo: "Model No",
     similarProducts: "Similar Products",
     moreFromThisBrand: 'More like this',
-    seeMore: 'See More'
+    seeMore: 'See More',
+    win: 'Win',
+    points: 'points',
+    ratings: 'Ratings',
 }

@@ -27,4 +27,7 @@ export default {
     similarProducts: "المنتجات المتشابهة",
     moreFromThisBrand: 'المزيد من هذه الماركة',
     seeMore: 'شاهد المزيد',
+    win: 'اكسب',
+    points: 'نقاط',
+    ratings: 'تقييمات',
 }
