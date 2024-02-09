@@ -5,7 +5,7 @@ const { Search } = Input;
 import { ref } from 'vue'
 import { gql, request } from 'graphql-request'
 import { useI18n } from 'vue-i18n'
-import { inject } from 'vue';
+import { inject, onMounted, watch } from 'vue';
 import { state } from '../states'
 const { t } = useI18n();
 
@@ -20,7 +20,11 @@ let message = ref('');
 let categories = ref([]);
 
 
-
+onMounted(() => {
+  changeCountry(selectedCountry.value);
+  console.log('inside onMounted')
+  console.log('selectedCountry', selectedCountry.value);
+})
 
 
 
@@ -43,15 +47,21 @@ const convertPrice = (priceInUSD) => {
   return country ? priceInUSD * country.rate : priceInUSD;
 };
 
+// when the page first loads prices are in USD not SAR
 const changeCountry = (country) => {
   selectedCountry.value = country;
-  console.log('selected country changed', selectedCountry.value)
   // logic to change currency
   state.symbol = currencySymbol(selectedCountry)
 
   // actual price to be added
-  state.newPrice = convertPrice(100)
+  state.price = convertPrice(state.priceBase) 
+  state.discountedPrice = convertPrice(state.discountBase)
 };
+// watch(() => selectedCountry, (newVal, oldVal) => {
+//   console.log('selectedCountry', newVal);
+//   console.log('oldVal', oldVal);
+//   changeCountry(newVal);
+// });
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
@@ -128,8 +138,8 @@ const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r
         </div>
         <template #overlay>
           <a-menu>
-            <a-menu-item v-for="country in countries" :key="index" @click="changeCountry(country.name)">
-              {{ $t(country.name) }}
+            <a-menu-item v-if="countries" v-for="(country, index) in countries" :key="index" @click="changeCountry(country.name)">
+              {{ country.name }}
             </a-menu-item>
           </a-menu>
         </template>

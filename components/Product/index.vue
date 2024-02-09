@@ -51,6 +51,10 @@ const loadProductDetails = async () => {
   productDetails.value = await request(endpoint, productByIDQuery)
   productImages.value = productDetails.value.productGetImagesByID
   productRatings.value = productDetails.value.productGetRatingsByID
+  state.priceBase = productDetails.value.productGetByID.price
+  state.price = productDetails.value.productGetByID.price
+  state.discountedPrice = productDetails.value.productGetByID.discounted_price
+  state.discountBase = productDetails.value.productGetByID.discounted_price
 }
 loadProductDetails()
 watch(locale, loadProductDetails, { immediate: true });
@@ -140,11 +144,11 @@ const addToCart = () => {
               fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '18px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
               textDecoration: 'line-through'
             }">
-              {{ $t('before') }}: {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+              {{ $t('before') }}: {{ state.price }} {{ state.symbol }}</p>
 
             <p
               :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '24px', fontWeight: 700, lineHeight: '29px', letterSpacing: '0em' }">
-              {{ $t('now') }}: <span :style="{ fontSize: '30px' }">{{ productDetails.productGetByID.discounted_price }} {{
+              {{ $t('now') }}: <span :style="{ fontSize: '30px' }">{{ state.discountedPrice }} {{
                 state.symbol }} </span>
               <span :style="{
                 fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '18px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393'
@@ -158,7 +162,7 @@ const addToCart = () => {
 
               <p
                 :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 500, lineHeight: '24px', letterSpacing: '0em' }">
-                {{ $t('saved') }}: {{ productDetails.productGetByID.price - productDetails.productGetByID.discounted_price
+                {{ $t('saved') }}: {{ state.price - state.discountedPrice
                 }}
                 {{
                   state.symbol }}
@@ -166,8 +170,8 @@ const addToCart = () => {
                 :style="{ backgroundColor: '#E53E3E', padding: '6px, 10px, 6px, 10px' }">
                 <p
                   :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
-                  {{ $t('discount') }} {{ Math.round((productDetails.productGetByID.price -
-                    productDetails.productGetByID.discounted_price) / productDetails.productGetByID.price * 100) }}%
+                  {{ $t('discount') }} {{ Math.round((state.price -
+                    state.discountedPrice) / state.price * 100) }}%
                 </p>
               </div>
               </p>
@@ -184,11 +188,11 @@ const addToCart = () => {
                   <div class="flex">
                     <p
                       :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 700, lineHeight: '24px', letterSpacing: '0em' }">
-                      {{ productDetails.productGetByID.price }} {{ state.symbol }}</p>
+                      {{ state.price }} {{ state.symbol }}</p>
                     <p :style="{
                       fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '14px', fontWeight: 500, lineHeight: '21px', letterSpacing: '0em', color: '#939393',
                       textDecoration: 'line-through'
-                    }">{{ productDetails.productGetByID.discounted_price }} {{ state.symbol }}</p>
+                    }">{{ state.discountedPrice }} {{ state.symbol }}</p>
                   </div>
 
                 </div>
