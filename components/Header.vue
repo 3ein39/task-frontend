@@ -78,11 +78,7 @@ const loadCategories = async () => {
     }
   `;
   const data = await request(endpoint, query);
-  categories = data.categoryGetAll;
-
-  categories.forEach(element => {
-    console.log(element.title);
-  });
+  categories.value = data.categoryGetAll;
 }
 loadCategories();
 
