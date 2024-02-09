@@ -142,11 +142,12 @@ const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r
 
     <div class="mid-pane">
       <div class="flex flex-row w-full">
-          <input :class="['w-full', 'py-2','px-4' ,'focus:outline-none', 'focus:ring-0', roundedClass]" type="text"
+        <input :class="['w-full', 'py-2', 'px-4', 'focus:outline-none', 'focus:ring-0', roundedClass]" type="text"
           placeholder="input search text" />
         <!-- recent searches and overlay to be implemented -->
-        <button @click="isFinished" :class="['py-2', 'text-white','px-4', roundedClassX]" style="background-color: #FFBD1F;">
-            <img src="/assets/icons/search.png" alt="Search" />
+        <button @click="isFinished" :class="['py-2', 'text-white', 'px-4', roundedClassX]"
+          style="background-color: #FFBD1F;">
+          <img src="/assets/icons/search.png" alt="Search" />
         </button>
       </div>
     </div>
@@ -156,7 +157,15 @@ const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r
       <p @click="toggleDirection" class="btn" v-if="!isLTR"> EN </p>
       <p @click="toggleDirection" class="btn" v-if="isLTR"> AR </p>
 
-      <img src="assets/icons/cart.png" alt="" srcset="">
+      <div class="relative">
+        <img src="assets/icons/cart.png" alt="" srcset="">
+        <div class="h-6 w-6 bg-orange-500 text-white text-center rounded-full absolute top-[-10px] right-[-10px]"
+          v-if="state.numberOfProducts > 0">
+          {{ state.numberOfProducts }}
+        </div>
+      </div>
+
+
       <p class="btn" @click="fakeLogin" v-if="!isLoggedIn">{{ $t('login') }} </p>
       <p class="btn" @click="fakeLogin" v-if="isLoggedIn"> {{ $t('logout') }}</p>
 
@@ -167,14 +176,14 @@ const roundedClassX = computed(() => (!isLTR.value ? 'rounded-l-md' : 'rounded-r
   </header>
   <nav class="nav">
     <ul>
-       <li>
-          <MenuOutlined />
-        </li>
+      <li>
+        <MenuOutlined />
+      </li>
       <li v-if="categories" v-for="category in categories" :key="category.id">
         <!-- needs language support -->
         {{ category.title }}
       </li>
-     
+
     </ul>
   </nav>
   <p class="ar">{{ message }}</p>
