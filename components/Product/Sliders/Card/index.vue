@@ -47,9 +47,7 @@ const scroll = (direction) => {
         <div v-if="products" v-for="product in products" :key="product.product_id">
           <div class="bg-white rounded-lg overflow-hidden shadow-2xl p-6 w-80"
             :style="{ width: expanded ? flex : '0 0 auto' }">
-            <!--E11-->
-            <!-- <div class="h-48 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80')"></div> -->
-            <img class="h-48 w-full object-cover object-end" :src="product.images[0].url" alt="Home in Countryside" />
+            <img v-if="product.images[0]" class="h-48 w-full object-cover object-end" :src="product.images[0].url" alt="Home in Countryside" />
             <div class="p-6">
               <div class="flex items-baseline">
                 <span

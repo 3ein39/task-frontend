@@ -4,6 +4,7 @@ import { ref } from "vue";
 
 const { t } = useI18n()
 const endpoint = 'http://localhost:4000/graphql'
+const locale = inject('locale')
 let products = ref(null);
 
 let similarProductsTitle = 'similarProducts'
@@ -12,7 +13,7 @@ let moreLikeThisTitle = 'moreFromThisBrand'
 const loadProducts = async () => {
   const query = gql`
     query {
-      productGetAllWithImages {
+      productGetAllWithImages(locale: "${locale.value}") {
         product_id
         title
         description
@@ -32,9 +33,7 @@ loadProducts()
 const loadAvgRating = async (product_id) => {
   const query = gql`
     query {
-      productGetAvgRatingByID(product_id: ${product_id}) {
-        avg_rating
-      }
+      productAveragrRating(product_id: ${product_id})
     }
   `
   const data = await request(endpoint, query)
@@ -50,8 +49,8 @@ products.value?.productGetAllWithImages.forEach(async (product) => {
 
 <template>
 
-  <LazyProductSlidersCard :products="products.productGetAllWithImages" :title="similarProductsTitle" />
-  <LazyProductSlidersCard :products="products.productGetAllWithImages" :title="moreLikeThisTitle" />
+  <LazyProductSlidersCard v-if="products" :products="products.productGetAllWithImages" :title="similarProductsTitle" />
+  <LazyProductSlidersCard v-if="products" :products="products.productGetAllWithImages" :title="moreLikeThisTitle" />
 </template>
 
 <style scoped>
