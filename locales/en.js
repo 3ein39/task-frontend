@@ -41,4 +41,5 @@ export default {
     bestValue: 'Best value',
     brands: 'Brands',
     offers: 'Offers',
+    generalRating: 'General Rating',
 }

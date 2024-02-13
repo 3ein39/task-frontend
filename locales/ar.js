@@ -41,4 +41,5 @@ export default {
     bestValue: 'أفضل قيمة',
     brands: 'الماركات',
     offers: 'العروض',
+    generalRating: 'التقييم العام',
 }
