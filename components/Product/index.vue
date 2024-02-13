@@ -11,6 +11,7 @@ const endpoint = 'http://localhost:4000/graphql'
 let productDetails = ref(null);
 let productImages = ref(null);
 let productRatings = ref(null);
+let productRatingsGroup = ref(null);
 
 const loadProductDetails = async () => {
   const productByIDQuery = gql`
@@ -44,6 +45,10 @@ const loadProductDetails = async () => {
           username
         }
     },
+     productGetRatingsGroupByRating(product_id: 1) {
+        rating
+        count
+    },
     productGetRatingsCountByID(product_id: 1),
      productAverageRating(product_id: 1)
   }
@@ -51,6 +56,7 @@ const loadProductDetails = async () => {
   productDetails.value = await request(endpoint, productByIDQuery)
   productImages.value = productDetails.value.productGetImagesByID
   productRatings.value = productDetails.value.productGetRatingsByID
+  productRatingsGroup.value = productDetails.value.productGetRatingsGroupByRating
   state.priceBase = productDetails.value.productGetByID.price
   state.price = productDetails.value.productGetByID.price
   state.discountedPrice = productDetails.value.productGetByID.discounted_price
@@ -80,7 +86,7 @@ const scrollToRatings = () => {
   let tab = document.getElementById('ratings')
   tab.scrollIntoView({ behavior: 'smooth' });
   // click on the ratings tab
-  tab.click();
+  tab.click()
 }
 
 </script>
@@ -259,7 +265,7 @@ const scrollToRatings = () => {
 
 
 
-    <LazyProductInfo :product-details="productDetails" :product-ratings="productRatings" />
+    <LazyProductInfo :product-details="productDetails" :product-ratings="productRatings" :product-ratings-group="productRatingsGroup" />
     <LazyProductSliders />
   </div>
 </template>
