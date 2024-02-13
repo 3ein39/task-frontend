@@ -29,6 +29,9 @@ const loadProducts = async () => {
   // console.log(products.value)
 }
 loadProducts()
+watch(locale, () => {
+  loadProducts()
+})
 
 const loadAvgRating = async (product_id) => {
   const query = gql`
