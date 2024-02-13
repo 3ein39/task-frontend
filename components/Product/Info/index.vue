@@ -13,7 +13,7 @@ const props = defineProps({
 
 const tabs = computed(() => [
   { title: t('information'), benefits: props.productDetails.productGetByID.benefits, overview: props.productDetails.productGetByID.overview },
-  { title: t('details'), class: props.productDetails.productGetByID.gender, capacity: props.productDetails.productGetByID.capacity, model_number: props.productDetails.productGetByID.model_number},
+  { title: t('details'), class: props.productDetails.productGetByID.gender, capacity: props.productDetails.productGetByID.capacity, model_number: props.productDetails.productGetByID.model_number },
   { title: t('ratings') }
 ])
 
@@ -27,7 +27,8 @@ const activeTab = ref(0);
   <div class="flex flex-col w-full px-16 py-32">
     <div class="flex mb-4">
       <div v-for="(tab, index) in tabs" :key="index" class="cursor-pointer py-2 mx-14 px-2 tab-nav"
-        :class="{ 'tab-border in-focus': activeTab === index, 'ar': locale === 'ar' }" @click="activeTab = index">
+        :class="{ 'tab-border in-focus': activeTab === index, 'ar': locale === 'ar' }" @click="activeTab = index"
+        :id="index === 2 ? 'ratings' : ''">
         {{ tab.title }}
       </div>
     </div>

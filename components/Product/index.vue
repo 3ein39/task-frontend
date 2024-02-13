@@ -76,6 +76,13 @@ const addToCart = () => {
   state.numberOfProducts += parseInt(productNum);
 }
 
+const scrollToRatings = () => {
+  let tab = document.getElementById('ratings')
+  tab.scrollIntoView({ behavior: 'smooth' });
+  // click on the ratings tab
+  tab.click();
+}
+
 </script>
 
 <template>
@@ -132,7 +139,8 @@ const addToCart = () => {
 
               </div>
               <p
-                :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 500, lineHeight: '24px', letterSpacing: '0em', color: '#036C46' }">
+                @click="scrollToRatings"
+                :style="{ fontFamily: `${locale === 'ar' ? 'Montserrat-Arabic' : 'Montserrat'}`, fontSize: '20px', fontWeight: 500, lineHeight: '24px', letterSpacing: '0em', color: '#036C46', textDecoration: 'underline', cursor: 'pointer' }">
                 {{ productDetails.productGetRatingsCountByID }} {{ $t('ratings') }}</p>
             </div>
 
