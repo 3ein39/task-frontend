@@ -22,6 +22,20 @@ const scroll = (direction) => {
     scrollContainer.value.scrollLeft += direction * 300;
   }
 };
+
+let favStatus = ref({});
+props.products.forEach((product) => {
+  favStatus.value[product.product_id] = 'white';
+});
+
+const toggleFav = (id) => {
+  console.log(id);
+  if (favStatus.value[id] === '#FF0000') {
+    favStatus.value[id] = 'white';
+  } else {
+    favStatus.value[id] = '#FF0000';
+  }
+}
 </script>
 
 
@@ -36,8 +50,8 @@ const scroll = (direction) => {
     <div class="p-8 items-center justify-center flex">
 
       <!-- <button @click="scroll(1)">→</button> -->
-      <LeftOutlined v-if="locale === 'en'" @click='scroll(1)'/>
-      <RightOutlined v-if="locale ==='ar'" @click="scroll(-1)"/>
+      <LeftOutlined v-if="locale === 'en'" @click='scroll(1)' />
+      <RightOutlined v-if="locale === 'ar'" @click="scroll(-1)" />
 
 
       <!-- start of card -->
@@ -45,9 +59,17 @@ const scroll = (direction) => {
         :style="{ flexWrap: expanded ? 'wrap' : 'nowrap' }">
 
         <div v-if="products" v-for="product in products" :key="product.product_id">
-          <div class="bg-white rounded-lg overflow-hidden shadow-2xl p-6 w-80"
-            :style="{ width: expanded ? flex : '0 0 auto' }">
-            <img v-if="product.images[0]" class="h-48 w-full object-cover object-end" :src="product.images[0].url" alt="Home in Countryside" />
+          <div class="relative bg-white rounded-lg overflow-hidden p-3 m-3 w-80 border border-gray-300"           :style="{ width: expanded ? flex : '0 0 auto' }">
+            <img v-if="product.images[0]" class="h-48 w-full object-cover object-end" :src="product.images[0].url"
+              alt="Home in Countryside" />
+              
+            <svg @click="toggleFav(product.product_id)" xmlns="http://www.w3.org/2000/svg" :fill="favStatus[product.product_id]" viewBox="0 0 24 24"
+              strokeWidth={1.5} stroke="#939393"
+              :class="locale === 'en' ? 'w-12 h-12 absolute top-0 left-10 cursor-pointer' : 'w-12 h-12 absolute top-0 right-10 cursor-pointer'"
+              >
+              <path strokeLinecap="round" strokeLinejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            </svg>
             <div class="p-6">
               <div class="flex items-baseline">
                 <span
@@ -81,8 +103,8 @@ const scroll = (direction) => {
       </div>
 
       <!-- <button @click="scroll(-1)">←</button> -->
-      <RightOutlined v-if="locale === 'en'" @click='scroll(-1)'/>
-      <LeftOutlined v-if="locale ==='ar'" @click="scroll(1)"/>
+      <RightOutlined v-if="locale === 'en'" @click='scroll(-1)' />
+      <LeftOutlined v-if="locale === 'ar'" @click="scroll(1)" />
 
 
     </div>
