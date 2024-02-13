@@ -59,21 +59,29 @@ const toggleFav = (id) => {
         :style="{ flexWrap: expanded ? 'wrap' : 'nowrap' }">
 
         <div v-if="products" v-for="product in products" :key="product.product_id">
-          <div class="relative bg-white rounded-lg overflow-hidden p-3 m-3 w-80 border border-gray-300"           :style="{ width: expanded ? flex : '0 0 auto' }">
-            <img v-if="product.images[0]" class="h-48 w-full object-cover object-end" :src="product.images[0].url"
-              alt="Home in Countryside" />
-              
-            <svg @click="toggleFav(product.product_id)" xmlns="http://www.w3.org/2000/svg" :fill="favStatus[product.product_id]" viewBox="0 0 24 24"
-              strokeWidth={1.5} stroke="#939393"
-              :class="locale === 'en' ? 'w-12 h-12 absolute top-0 left-10 cursor-pointer' : 'w-12 h-12 absolute top-0 right-10 cursor-pointer'"
-              >
+          <div class="relative bg-white rounded-lg overflow-hidden p-3 m-3 w-80 border border-gray-300"
+            :style="{ width: expanded ? flex : '0 0 auto' }">
+
+            <!-- to be implemented to play only on hover -->
+            <a-carousel autoplay>
+              <div v-for="(image, index) in product.images" :key="image.id">
+                <img class="h-48 w-full object-cover object-end" :src="image.url" alt="Product image" />
+              </div>
+            </a-carousel>
+
+
+            <svg @click="toggleFav(product.product_id)" xmlns="http://www.w3.org/2000/svg"
+              :fill="favStatus[product.product_id]" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#939393"
+              :class="locale === 'en' ? 'w-12 h-12 absolute top-0 left-10 cursor-pointer' : 'w-12 h-12 absolute top-0 right-10 cursor-pointer'">
               <path strokeLinecap="round" strokeLinejoin="round"
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
             </svg>
+
+            <span :class="locale === 'en' ? 'absolute top-2 right-10' : 'absolute top-2 left-10'"
+              class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New
+            </span>
             <div class="p-6">
               <div class="flex items-baseline">
-                <span
-                  class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
                 <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
                   placeholder
                 </div>
